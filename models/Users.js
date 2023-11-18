@@ -1,9 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     name: String,
     mobileNumbers: [
         {
+            _id: false,
             id: String,
             mobile: Number,
         },
@@ -16,6 +17,7 @@ const UserSchema = new mongoose.Schema({
     language: String,
     sno: [
         {
+            _id: false,
             id: String,
             serialNumber: Number,
             quantity: Number,
@@ -23,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     ],
     totalPrice: Number,
     orderedDate: String,
-})
+});
 
 const UserModel = mongoose.model('users', UserSchema);
-module.exports = UserModel
+module.exports = UserModel;

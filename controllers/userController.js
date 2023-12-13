@@ -7,17 +7,12 @@ exports.createUser = async (req, res) => {
     const { mobileNumbers } = req.body;
 
     try {
-        // Extract an array of mobile numbers from the request body
         const mobiles = mobileNumbers.map((item) => item.mobile);
-
-        // Find the user with any of the mobile numbers already existing in the database
         const existingUser = await UserModel.findOne({ 'mobileNumbers.mobile': { $in: mobiles } });
-
         if (existingUser) {
             const existingMobile = existingUser.mobileNumbers.find((item) => mobiles.includes(item.mobile));
             return res.status(400).json({ message: `Mobile Number ${existingMobile.mobile} already exists` });
         }
-
         const data = await UserModel.create(req.body);
         res.status(201).json(data);
     } catch (error) {
@@ -28,7 +23,7 @@ exports.createUser = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
     try {
-        const data = await UserModel.find();
+        const data = await UserModel.find().sort({ createdAt: -1, updatedAt: -1 });
         res.json(data);
     } catch (error) {
         res.status(500).json({ error: error.message });

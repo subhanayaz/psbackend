@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     ],
     totalPrice: Number,
     orderedDate: String,
-});
+}, { timestamps: true });
 
 const UserModel = mongoose.model('users', UserSchema);
 module.exports = UserModel;

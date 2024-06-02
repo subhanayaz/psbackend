@@ -1,13 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     name: String,
     mobileNumbers: [
-        {
-            _id: false,
-            id: String,
-            mobile: Number,
-        },
+      {
+        _id: false,
+        id: String,
+        mobile: Number,
+      },
     ],
     address: String,
     city: String,
@@ -16,16 +17,19 @@ const UserSchema = new mongoose.Schema({
     pincode: Number,
     language: String,
     sno: [
-        {
-            _id: false,
-            id: String,
-            serialNumber: Number,
-            quantity: Number,
-        },
+      {
+        _id: false,
+        id: String,
+        serialNumber: Number,
+        quantity: Number,
+      },
     ],
     totalPrice: Number,
     orderedDate: String,
-}, { timestamps: true });
+    isStickersPadSent: Boolean,
+  },
+  { timestamps: true }
+);
 
-const UserModel = mongoose.model('users', UserSchema);
+const UserModel = mongoose.model("users", UserSchema);
 module.exports = UserModel;
